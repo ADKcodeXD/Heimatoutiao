@@ -1,0 +1,156 @@
+@font-face {
+  font-family: "iconfont";
+  /* Project id 3144498 */
+  src: url('//at.alicdn.com/t/font_3144498_2h7uv3q892h.woff2?t=1642317748594') format('woff2'), url('//at.alicdn.com/t/font_3144498_2h7uv3q892h.woff?t=1642317748594') format('woff'), url('//at.alicdn.com/t/font_3144498_2h7uv3q892h.ttf?t=1642317748594') format('truetype');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal ;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-gengduo:before {
+  content: "\e605";
+}
+.icon-youjiantou:before {
+  content: "\e606";
+}
+.icon-dianzan:before {
+  content: "\e607";
+}
+.icon-pinglun:before {
+  content: "\e608";
+}
+.icon-lishi:before {
+  content: "\e609";
+}
+.icon-shanchu:before {
+  content: "\e60a";
+}
+.icon-fenxiang:before {
+  content: "\e60b";
+}
+.icon-guanbi:before {
+  content: "\e60c";
+}
+.icon-shipin:before {
+  content: "\e60d";
+}
+.icon-zuopin:before {
+  content: "\e60e";
+}
+.icon-shouji:before {
+  content: "\e60f";
+}
+.icon-wuwangluo:before {
+  content: "\e610";
+}
+.icon-sousuo:before {
+  content: "\e611";
+}
+.icon-dianzan2:before {
+  content: "\e612";
+}
+.icon-yanzhengma:before {
+  content: "\e613";
+}
+.icon-shouye:before {
+  content: "\e614";
+}
+.icon-wenda:before {
+  content: "\e615";
+}
+.icon-all:before {
+  content: "\e6ef";
+}
+.icon-code:before {
+  content: "\e6f2";
+}
+.icon-history:before {
+  content: "\e6f8";
+}
+.icon-editor:before {
+  content: "\e6f6";
+}
+.icon-data:before {
+  content: "\e6f9";
+}
+.icon-Notvisible:before {
+  content: "\e6fe";
+}
+.icon-play:before {
+  content: "\e701";
+}
+.icon-QRcode:before {
+  content: "\e704";
+}
+.icon-favorites-fill:before {
+  content: "\e721";
+}
+.icon-arrow-right:before {
+  content: "\e743";
+}
+.icon-arrow-left:before {
+  content: "\e744";
+}
+.icon-bad:before {
+  content: "\e745";
+}
+.icon-attachent:before {
+  content: "\e746";
+}
+.icon-browse:before {
+  content: "\e747";
+}
+.icon-cart-full:before {
+  content: "\e748";
+}
+.icon-category:before {
+  content: "\e749";
+}
+.icon-close:before {
+  content: "\e74a";
+}
+.icon-download:before {
+  content: "\e74d";
+}
+.icon-electronics:before {
+  content: "\e74e";
+}
+.icon-good:before {
+  content: "\e753";
+}
+.icon-leftarrow:before {
+  content: "\e755";
+}
+.icon-integral:before {
+  content: "\e754";
+}
+.icon-loading:before {
+  content: "\e756";
+}
+.icon-map:before {
+  content: "\e758";
+}
+.icon-hot-fill:before {
+  content: "\e781";
+}
+.icon-block:before {
+  content: "\e7de";
+}
+i {
+  font-style: normal;
+}
+body {
+  background-color: #f5f7f9;
+}
+.van-nav-bar__content {
+  background-color: #3296fa;
+}
+.van-nav-bar__title {
+  color: #fff !important;
+}
+.van-icon-arrow-left {
+  color: #fff !important;
+}
