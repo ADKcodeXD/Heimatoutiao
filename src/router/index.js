@@ -15,6 +15,17 @@ const router = new VueRouter({
             component: () => import('@/views/register')
         },
         {
+            path: '/search',
+            name: 'search',
+            component: () => import('@/views/search')
+        },
+        {
+            path: '/article/:articleId',
+            name: 'article',
+            component: () => import('@/views/article'),
+            props:true
+        },
+        {
             path: '/',
             component: () => import('@/views/layout'),
             children: [{

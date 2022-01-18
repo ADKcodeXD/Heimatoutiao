@@ -12,3 +12,8 @@ dayjs.locale('zh-cn')
 Vue.filter('xianduiTime',value=>{
     return dayjs(value).from(dayjs())
 })
+
+// 日期格式化 默认值YYYY-MM-DD HH:mm:ss
+Vue.filter('dateTime',(value,format="MM-DD HH:mm")=>{
+    return dayjs(value).format(format)
+})

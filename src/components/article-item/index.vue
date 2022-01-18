@@ -1,6 +1,6 @@
 <template>
     <div class="article-item">
-        <van-cell class="item-container">
+        <van-cell :to="{name:'article',params:{articleId:article.art_id}}" class="item-container">
             <div slot="title" class="title van-multi-ellipsis--l3">{{article.title}}</div>
             <div slot="label" class="label">
                 <!-- 三封面 -->

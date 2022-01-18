@@ -53,7 +53,8 @@
                     data
                 } = await getChannelById({
                     channel_id: this.channel.id,
-                    timestamp: this.timestamp === 0 ? Date.now() : this.timestamp
+                    timestamp: this.timestamp === 0 ? Date.now() : this.timestamp,
+                    with_top:0
                 });
                 const result = data.data.results;
                 this.timestamp = data.data.pre_timestamp || 0;
@@ -70,7 +71,8 @@
                 // 数据unshift
                 const {data} = await getChannelById({
                     channel_id: this.channel.id,
-                    timestamp: Date.now() 
+                    timestamp: Date.now(),
+                    with_top:0
                 });
                 const result = data.data.results;
                 result.forEach(item => {
