@@ -4,7 +4,10 @@ import {JSONbig} from 'json-bigint'
 
 const request = axios.create({
     baseURL: 'http://api-toutiao-web.itheima.net',
-    timeout: 5000
+    timeout: 5000,
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
     // transformResponse:[function(data){
     //     try {
     //         return JSONbig.parse(data)
@@ -22,7 +25,6 @@ request.interceptors.request.use((config) => {
     const {user} = store.state
     if (user) {
         config.headers.Authorization = `Bearer ${user.token}`
-        
     }
     return config;
 })

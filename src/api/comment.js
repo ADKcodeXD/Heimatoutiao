@@ -31,3 +31,14 @@ export const delikeComment = commentId => {
         url: `/app/v1_0/comment/likings/${commentId}`
     })
 }
+
+// 添加评论或回复评论
+// Path： /app/v1_0/comments
+// Method： POST
+export const addComment = data => {
+    return request({
+        method: 'POST',
+        url: '/app/v1_0/comments',
+        data
+    })
+}

@@ -26,6 +26,18 @@ const router = new VueRouter({
             props:true
         },
         {
+            path: '/user/profile',
+            name: 'userprofile',
+            component: () => import('@/views/userprofile'),
+            props:true
+        },
+        {
+            path: '/userchat',
+            name: 'userchat',
+            component: () => import('@/views/userchat'),
+            props:true
+        },
+        {
             path: '/',
             component: () => import('@/views/layout'),
             children: [{

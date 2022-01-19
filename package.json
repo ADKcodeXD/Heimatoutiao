@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "cropperjs": "^1.5.12",
     "dayjs": "^1.10.7",
     "github-markdown-css": "^5.1.0",
     "json-bigint": "^1.0.0",
     "lodash": "^4.17.21",
+    "socket.io-client": "^4.4.1",
     "vant": "^2.12.39",
     "vue": "^2.6.11",
     "vue-router": "^3.5.3",

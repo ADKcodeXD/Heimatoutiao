@@ -16,7 +16,7 @@
                     <div class="content">{{comment.content}}</div>
                     <div class="bottom">
                         <span class="time">{{comment.pubdate | dateTime}}</span>
-                        <van-button class="recomment" type="primary" size="mini" round>回复</van-button>
+                        <van-button @click="$emit('Reply',comment)" class="recomment" type="primary" size="mini" round>回复</van-button>
                     </div>
                 </div>
             </van-cell>

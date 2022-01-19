@@ -6,7 +6,7 @@
             <van-cell :border="false" center title="单元格" class="base-info">
                 <van-image slot="icon" class="avatar" round :src="currentUser.photo" fit="cover" />
                 <div slot="title" class="name">{{currentUser.name}}</div>
-                <van-button size="small" class="right-btn" round slot="right-icon">编辑资料</van-button>
+                <van-button size="small" to="/user/profile" class="right-btn" round slot="right-icon">编辑资料</van-button>
             </van-cell>
             <!-- 头像下部宫格布局 -->
             <van-grid :border="false" class="data-info">
@@ -55,7 +55,7 @@
 
         <!-- 下方的单元格 -->
         <van-cell title="消息通知" is-link to="/" />
-        <van-cell title="人工智障" is-link to="/" class="mb-15" />
+        <van-cell title="人工智障" to="/userchat" is-link  class="mb-15" />
         <van-cell title="退出登录" v-if="user" @click="onLogout" class="logout" />
     </div>
 </template>

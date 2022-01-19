@@ -16,24 +16,36 @@
             <div ref="article-content" class="content markdown-body" v-html="article.content">
             </div>
             <van-divider>文章到这里结束啦~</van-divider>
+            <div class="title">全部评论</div>
             <!-- 评论区 -->
-            <comment-list :source="article.art_id" v-if="child" >
+            <comment-list @Reply="onReplyClick" @update-commentLength="totalCommentCount=$event" :list="commentList"
+                :source="article.art_id" v-if="child">
             </comment-list>
         </div>
 
 
         <!-- 底部区域 -->
         <div class="bottom-content">
-            <van-button type="default" class="comment-btn" round size="medium">
+            <van-button @click="isPostShow=true" type="default" class="comment-btn" round size="medium">
                 写评论
             </van-button>
-            <van-icon name="comment-o" badge="6" />
+            <van-icon name="comment-o" :badge="totalCommentCount" />
             <van-icon :name="article.is_collected?'star':'star-o'" :color="article.is_collected?'orange':''"
                 @click="onCollect" />
             <van-icon @click="onLike" :name="article.attitude==-1?'good-job-o':'good-job'"
                 :color="article.attitude==-1?'':'#3296fa'" />
             <van-icon name="share-o" />
         </div>
+
+        <!-- 发布评论区 -->
+        <van-popup v-model="isPostShow" position="bottom">
+            <post-comment @post-success="onPostSuccess" :target="articleId"></post-comment>
+        </van-popup>
+
+        <!-- 评论的评论 -->
+        <van-popup v-model="isReplyShow" position="bottom">
+            <comment-reply :articleId="articleId" v-if="isReplyShow" @close="isReplyShow=false" :comment="replyComment"></comment-reply>
+        </van-popup>
     </div>
 </template>
 
@@ -60,9 +72,13 @@
         getArticleById
     } from '@/api/article';
     import commentList from './components/comment-list.vue';
+    import PostComment from './components/post-comment.vue';
+    import CommentReply from './components/comment-reply.vue';
     export default {
         components: {
-            commentList
+            commentList,
+            PostComment,
+            CommentReply
         },
         name: 'Article',
         props: ['articleId'],
@@ -70,12 +86,17 @@
             return {
                 article: {},
                 isFollowLoding: false,
-                child:false
+                child: false,
+                isPostShow: false,
+                commentList: [],
+                totalCommentCount: 0,
+                isReplyShow: false,
+                replyComment:{}
             }
         },
         async created() {
             await this.getArticle();
-            this.child=true;
+            this.child = true;
         },
         computed: {
             ...mapState(['user'])
@@ -142,7 +163,7 @@
                     });
                 }
                 Toast.success({
-                    message: this.article.is_collected?'收藏成功':'已取消收藏'
+                    message: this.article.is_collected ? '收藏成功' : '已取消收藏'
                 })
             },
             async onLike() {
@@ -166,6 +187,16 @@
                 Toast.success({
                     message: '操作成功'
                 })
+            },
+            onPostSuccess(content) {
+                this.commentList.unshift(content);
+                this.totalCommentCount++;
+                this.isPostShow = false;
+            },
+            onReplyClick(comment) {
+                this.isReplyShow=true;
+                this.replyComment=comment;
+                console.log(comment);
             }
         },
     }

@@ -17,12 +17,24 @@ const mutations={
         state.user=user;
         // 需要进行持久化
         setItem(USER_KEY,state.user)
+    },
+    ADDCACHEPAGE(state,pageName){
+        if(!state.cachePages.includes(pageName)){
+            state.cachePages.push(pageName);
+        }
+    },
+    REMOVECACHEPAGE(state,pageName){
+        const index= state.cachePages.indexOf(pageName);
+        if(index!==-1){
+            cachePages.splice(index,1);
+        }
     }
 }
 
 // 准备state
 const state={
-    user:getItem(USER_KEY)
+    user:getItem(USER_KEY),
+    cachePages:['layout']
 }
 
 const getters={

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <van-nav-bar title="登录" left-arrow />
+        <van-nav-bar title="登录" left-arrow @click-left="$router.back()"/>
         <!-- 表单 -->
         <van-form @submit="onLogin" @failed="onFailed" ref="login-form" :show-error="false" :show-error-message="false"
             :validate-first="true">
@@ -79,6 +79,10 @@
                     const {data}=await login(this.user)
                     Toast.success('登录成功！');
                     this.$store.dispatch('setUser',data.data)
+
+                    // 跳转之前 清除页面缓存
+                    this.$store.commit('REMOVECACHEPAGE','layout');
+
                     this.$router.back();
                 } catch (error) {
                     console.log(error)

@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 
 import store from '@/store/'
+
 // 登录注册验证
 // Path：  /app/v1_0/authorizations
 // Method： POST
