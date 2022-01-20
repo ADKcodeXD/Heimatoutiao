@@ -84,6 +84,7 @@ import UpdatePhoto from './components/update-photo.vue';
         },
         created() {
             this.loadUserProfile();
+            this.$store.commit('REMOVECACHEPAGE','layout');
         }
     }
 </script>

@@ -26,7 +26,7 @@ const mutations={
     REMOVECACHEPAGE(state,pageName){
         const index= state.cachePages.indexOf(pageName);
         if(index!==-1){
-            cachePages.splice(index,1);
+            state.cachePages.splice(index,1);
         }
     }
 }

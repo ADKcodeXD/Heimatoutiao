@@ -32,8 +32,8 @@
             <van-icon name="comment-o" :badge="totalCommentCount" />
             <van-icon :name="article.is_collected?'star':'star-o'" :color="article.is_collected?'orange':''"
                 @click="onCollect" />
-            <van-icon @click="onLike" :name="article.attitude==-1?'good-job-o':'good-job'"
-                :color="article.attitude==-1?'':'#3296fa'" />
+            <van-icon @click="onLike" :name="article.attitude==1?'good-job':'good-job-o'"
+                :color="article.attitude==1?'#3296fa':''" />
             <van-icon name="share-o" />
         </div>
 
@@ -44,7 +44,8 @@
 
         <!-- 评论的评论 -->
         <van-popup v-model="isReplyShow" position="bottom">
-            <comment-reply :articleId="articleId" v-if="isReplyShow" @close="isReplyShow=false" :comment="replyComment"></comment-reply>
+            <comment-reply :articleId="articleId" v-if="isReplyShow" @close="isReplyShow=false" :comment="replyComment">
+            </comment-reply>
         </van-popup>
     </div>
 </template>
@@ -91,7 +92,8 @@
                 commentList: [],
                 totalCommentCount: 0,
                 isReplyShow: false,
-                replyComment:{}
+                replyComment: {},
+                scrollTop: 0
             }
         },
         async created() {
@@ -152,19 +154,19 @@
                 })
                 if (this.user) {
                     if (this.article.is_collected) {
-                        await addCollect(this.article.art_id);
-                    } else {
                         await deleteCollect(this.article.art_id);
+                    } else {
+                        await addCollect(this.article.art_id);
                     }
                     this.article.is_collected = !this.article.is_collected;
+                    Toast.success({
+                        message: this.article.is_collected ? '收藏成功' : '已取消收藏'
+                    })
                 } else {
                     this.$toast({
                         message: '请登录后进行操作'
                     });
                 }
-                Toast.success({
-                    message: this.article.is_collected ? '收藏成功' : '已取消收藏'
-                })
             },
             async onLike() {
                 Toast.loading({
@@ -179,14 +181,14 @@
                         await userCancelLike(this.article.art_id);
                         this.article.attitude = -1;
                     }
+                    Toast.success({
+                        message: '操作成功'
+                    })
                 } else {
                     this.$toast({
                         message: '请登录后进行操作'
                     });
                 }
-                Toast.success({
-                    message: '操作成功'
-                })
             },
             onPostSuccess(content) {
                 this.commentList.unshift(content);
@@ -194,8 +196,8 @@
                 this.isPostShow = false;
             },
             onReplyClick(comment) {
-                this.isReplyShow=true;
-                this.replyComment=comment;
+                this.isReplyShow = true;
+                this.replyComment = comment;
                 console.log(comment);
             }
         },

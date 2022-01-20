@@ -1,5 +1,5 @@
 <template>
-    <div class="article-cotainer">
+    <div class="article-cotainer" ref="article-list">
         <!-- 下拉刷新容器 -->
         <van-pull-refresh 
         v-model="isPullRefresh" 
@@ -24,7 +24,8 @@
 
 <script>
     import {getChannelById} from '@/api/article';
-    import ArticleItem from '@/components/article-item'
+    import ArticleItem from '@/components/article-item';
+    import {debounce} from 'lodash';
     export default {
         name: 'Articlelist',
         components:{
@@ -40,11 +41,21 @@
                 refreshSuccessText:''
             }
         },
+        activated(){
+            this.$refs['article-list'].scrollTop=this.scrollTop
+        },
         props: {
             channel: {
                 type: Object,
                 required: true
             }
+        },
+        mounted() {
+            const articleList = this.$refs['article-list'];
+            articleList.onscroll = debounce( () =>{
+                this.scrollTop=articleList.scrollTop;
+                console.log(this.scrollTop);
+            },50)
         },
         methods: {
             async onLoad() {

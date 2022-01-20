@@ -20,6 +20,9 @@
             return {
                 active: 0,
             }
+        },
+        mounted(){
+            this.$store.commit('ADDCACHEPAGE','layout');
         }
     }
 </script>

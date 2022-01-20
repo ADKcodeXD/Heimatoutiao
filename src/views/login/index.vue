@@ -83,7 +83,9 @@
                     // 跳转之前 清除页面缓存
                     this.$store.commit('REMOVECACHEPAGE','layout');
 
-                    this.$router.back();
+                    // this.$router.back();
+                    // 跳转回原来的页面
+                    this.$router.push(this.$route.query.redirect || '/')
                 } catch (error) {
                     console.log(error)
                     Toast.fail('登录失败！')
