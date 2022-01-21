@@ -20,16 +20,5 @@ module.exports = {
         // 输出文件名会被推导为 `subpage.html`。
         subpage: 'src/main.js'
     },
-    lintOnSave: false,
-    devServer: {
-        https: {
-            key: readFileSync('./.ssl/cert.key'),
-            cert: readFileSync('./.ssl/cert.crt'),
-            cacert: readFileSync('./.ssl/ca.crt'),
-        },
-        headers: {
-            'Access-Control-Allow-Private-Network': true,
-            'Access-Control-Allow-Origin': '*',
-        }
-    }
+    lintOnSave: false
 }

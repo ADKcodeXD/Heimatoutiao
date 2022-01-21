@@ -67,3 +67,15 @@ export const userCancelLike = articleId => {
         url: `/app/v1_0/article/likings/${articleId}`
     })
 }
+
+
+// 获取用户收藏文章列表
+// Path： /app/v1_0/article/collections
+// Method： GET
+export const getUserCollect = (params) => {
+    return request({
+        method: 'GET',
+        url: '/app/v1_0/article/collections',
+        params
+    })
+}

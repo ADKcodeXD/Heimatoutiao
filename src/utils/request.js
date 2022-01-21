@@ -1,14 +1,18 @@
 import axios from 'axios'
 import store from '@/store'
 import router from '@/router'
-import {Toast} from 'vant'
+import {
+    Toast
+} from 'vant'
 import {
     JSONbig
 } from 'json-bigint'
 
-const refreshTokenReq=axios.create({
-    baseURL:'http://api-toutiao-web.itheima.net',
 
+
+
+const refreshTokenReq = axios.create({
+    baseURL: 'http://api-toutiao-web.itheima.net',
 })
 
 
@@ -45,58 +49,62 @@ request.interceptors.request.use((config) => {
 // 响应失败
 request.interceptors.response.use((response) => {
     return response;
-},async function (error) {
+}, async function (error) {
     console.log(error.response);
     const status = error.response.status;
-    if(status==400){
+    if (status == 400) {
         // 参数错误
         Toast.fail('请求参数错误~')
-    }else if (status == 401) {
+    } else if (status == 401) {
         // token无效
         // 如果没有user 则跳转登录页重新登录
         // 有user  拿着刷新token去重新登录
-        const {user}=store.state;
-        if(!user||!user.token){
+        const {
+            user
+        } = store.state;
+        if (!user || !user.token) {
             // 未登录 重新登录
             redirectLogin()
-        }else{
+        } else {
             try {
-                const {data}=await refreshTokenReq({
+                const {
+                    data
+                } = await refreshTokenReq({
                     url: '/app/v1_0/authorizations',
-                    method:"PUT",
-                    headers:{
-                        Authorization:`Bearer ${user.refresh_token}`
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${user.refresh_token}`
                     }
                 })
-                user.token=data.data.token;
-                store.commit('SETUSER',user);
+                user.token = data.data.token;
+                store.commit('SETUSER', user);
                 // 处理完usertoken 重新发起请求
                 return request(error.config);
             } catch (error) {
                 // 刷新失败 直接跳转登录页
                 Toast.fail('登录验证失败，请重新登录~');
-                store.state.user=null;
-                store.commit('REMOVECACHEPAGE','layout');
+                store.state.user = null;
+                store.commit('REMOVECACHEPAGE', 'layout');
                 // redirectLogin()
-                
+
             }
         }
     } else if (status == 403) {
         // 无权限
         Toast.fail('您没有权限~')
-    }else if(status>=500){
+    } else if (status >= 500) {
         // 服务端异常
         Toast.fail('服务端出现异常~')
     }
-    
+
     return Promise.reject(error)
 })
 
-function redirectLogin(){
+function redirectLogin() {
     router.replace({
-        name:'login',
-        query:{
-            redirect:router.currentRoute.fullPath
+        name: 'login',
+        query: {
+            redirect: router.currentRoute.fullPath
         }
     })
 }

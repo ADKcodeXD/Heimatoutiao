@@ -1,7 +1,7 @@
 <template>
     <div class="search-result">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-            <van-cell v-for="(article,index) in list" :key="index" :title="article.title" />
+            <article-item v-for="(article,index) in list" :key="index" :article="article" />
         </van-list>
     </div>
 </template>
@@ -9,9 +9,13 @@
 <script>
     import {
         getSearchResult
-    } from '@/api/search'
+    } from '@/api/search';
+    import ArticleItem from '@/components/article-item';
     export default {
         name: 'searchResult',
+        components:{
+            ArticleItem
+        },
         data() {
             return {
                 list: [],
@@ -33,7 +37,7 @@
                     q: this.searchText
                 })
                 const {results} = data.data;
-
+                console.log(results);
                 this.list.push(...results);
 
                 // 加载状态结束

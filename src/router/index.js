@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
-
+import store from '@/store'
+import {Toast} from 'vant'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -43,6 +44,20 @@ const router = new VueRouter({
             props:true
         },
         {
+            path: '/usercollect',
+            name: 'usercollect',
+            meta:{requireAuth:true},
+            component: () => import('@/views/usercollect'),
+            props:true
+        },
+        {
+            path: '/userhistory',
+            name: 'userhistory',
+            meta:{requireAuth:true},
+            component: () => import('@/views/usercollect'),
+            props:true
+        },
+        {
             path: '/',
             meta:{requireAuth:false},
             component: () => import('@/views/layout'),
@@ -51,14 +66,14 @@ const router = new VueRouter({
                     component: () => import('@/views/home')
                 },
                 {
-                    path: '/video',
+                    path: '/todolist',
                     meta:{requireAuth:false},
-                    component: () => import('@/views/video')
+                    component: () => import('@/views/todolist')
                 },
                 {
-                    path: '/qa',
+                    path: '/weather',
                     meta:{requireAuth:false},
-                    component: () => import('@/views/qa')
+                    component: () => import('@/views/weather')
                 },
                 {
                     path: '/my',
@@ -70,4 +85,15 @@ const router = new VueRouter({
     ]
 })
 
+router.beforeEach((to,from,next)=>{
+    if(to.meta.requireAuth){
+        if(store.state.user){
+            next();
+        }else{
+            Toast('请登录后访问')
+        }
+    }else{
+        next();
+    }
+})
 export default router;

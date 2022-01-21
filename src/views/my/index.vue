@@ -49,7 +49,7 @@
 
         <!-- 收藏和历史 -->
         <van-grid :column-num="2" class="nav-grid mb-15">
-            <van-grid-item class="iconfont nav-grid-item" icon-prefix="icon" icon="good" text="收藏" />
+            <van-grid-item class="iconfont nav-grid-item" icon-prefix="icon" icon="good" text="收藏" @click="$router.push('/usercollect')" />
             <van-grid-item class="iconfont nav-grid-item" icon-prefix="icon" icon="browse" text="历史" />
         </van-grid>
 
