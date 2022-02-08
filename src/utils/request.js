@@ -85,8 +85,7 @@ request.interceptors.response.use((response) => {
                 Toast.fail('登录验证失败，请重新登录~');
                 store.state.user = null;
                 store.commit('REMOVECACHEPAGE', 'layout');
-                // redirectLogin()
-
+                redirectLogin()
             }
         }
     } else if (status == 403) {

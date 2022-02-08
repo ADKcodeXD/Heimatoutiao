@@ -8,7 +8,9 @@ const router = new VueRouter({
     routes: [{
             path: '/login',
             name: 'login',
-            meta:{requireAuth:false},
+            meta: {
+                requireAuth: false
+            },
             component: () => import('@/views/login')
         },
         {
@@ -19,47 +21,61 @@ const router = new VueRouter({
         {
             path: '/search',
             name: 'search',
-            meta:{requireAuth:false},
+            meta: {
+                requireAuth: false
+            },
             component: () => import('@/views/search')
         },
         {
             path: '/article/:articleId',
             name: 'article',
-            meta:{requireAuth:false},
+            meta: {
+                requireAuth: false
+            },
             component: () => import('@/views/article'),
-            props:true
+            props: true
         },
         {
             path: '/user/profile',
             name: 'userprofile',
-            meta:{requireAuth:true},
+            meta: {
+                requireAuth: true
+            },
             component: () => import('@/views/userprofile'),
-            props:true
+            props: true
         },
         {
             path: '/userchat',
             name: 'userchat',
-            meta:{requireAuth:false},
+            meta: {
+                requireAuth: false
+            },
             component: () => import('@/views/userchat'),
-            props:true
+            props: true
         },
         {
             path: '/usercollect',
             name: 'usercollect',
-            meta:{requireAuth:true},
+            meta: {
+                requireAuth: true
+            },
             component: () => import('@/views/usercollect'),
-            props:true
+            props: true
         },
         {
             path: '/userhistory',
             name: 'userhistory',
-            meta:{requireAuth:true},
+            meta: {
+                requireAuth: true
+            },
             component: () => import('@/views/usercollect'),
-            props:true
+            props: true
         },
         {
             path: '/',
-            meta:{requireAuth:false},
+            meta: {
+                requireAuth: false
+            },
             component: () => import('@/views/layout'),
             children: [{
                     path: '', //默认子路由
@@ -67,17 +83,23 @@ const router = new VueRouter({
                 },
                 {
                     path: '/todolist',
-                    meta:{requireAuth:false},
+                    meta: {
+                        requireAuth: false
+                    },
                     component: () => import('@/views/todolist')
                 },
                 {
                     path: '/weather',
-                    meta:{requireAuth:false},
+                    meta: {
+                        requireAuth: false
+                    },
                     component: () => import('@/views/weather')
                 },
                 {
                     path: '/my',
-                    meta:{requireAuth:false},
+                    meta: {
+                        requireAuth: false
+                    },
                     component: () => import('@/views/my')
                 }
             ]
@@ -85,15 +107,17 @@ const router = new VueRouter({
     ]
 })
 
-router.beforeEach((to,from,next)=>{
-    if(to.meta.requireAuth){
-        if(store.state.user){
+router.beforeEach((to, from, next) => {
+    if (to.meta.requireAuth) {
+        if (store.state.user) {
             next();
-        }else{
+        } else {
             Toast('请登录后访问')
         }
-    }else{
+    } else {
         next();
     }
 })
+
+
 export default router;
